@@ -7,15 +7,18 @@ let box6 = document.querySelectorAll(".little6");
 let box7 = document.querySelectorAll(".little7");
 let box8 = document.querySelectorAll(".little8");
 let box9 = document.querySelectorAll(".little9");
-let big1 = document.querySelectorAll(".one");
-let big2 = document.querySelectorAll(".two");
-let big3 = document.querySelectorAll(".three");
-let big4 = document.querySelectorAll(".four");
-let big5 = document.querySelectorAll(".five");
-let big6 = document.querySelectorAll(".six");
-let big7 = document.querySelectorAll(".seven");
-let big8 = document.querySelectorAll(".eight");
-let big9 = document.querySelectorAll(".nine");
+let bigBox = document.querySelectorAll(".square");
+let big1 = document.querySelector(".one");
+let big2 = document.querySelector(".two");
+let big3 = document.querySelector(".three");
+let big4 = document.querySelector(".four");
+let big5 = document.querySelector(".five");
+let big6 = document.querySelector(".six");
+let big7 = document.querySelector(".seven");
+let big8 = document.querySelector(".eight");
+let big9 = document.querySelector(".nine");
+let container = document.querySelector(".container");
+let cover = document.querySelectorAll(".cover");
 let playerX = true;
 let pieceCount = 0;
 let winner;
@@ -38,6 +41,7 @@ class Board {
     for (let i = 0; i < this.box.length; i++) {
       // check for player x and o
       this.box[i].addEventListener("click", () => {
+        document.querySelector("h1").innerText = i;
         if (playerX && this.box[i].innerText === "") {
           this.box[i].innerText = "X";
           playerX = false;
@@ -57,64 +61,64 @@ class Board {
       this.one.innerText === this.three.innerText
     ) {
       winner = this.one.innerText;
-      this.bigBox[0].innerText = winner;
-      this.bigBox[0].classList.add("smallGameOver");
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("smallGameOver");
     } else if (
       this.four.innerText &&
       this.four.innerText === this.five.innerText &&
       this.four.innerText === this.six.innerText
     ) {
       winner = this.four.innerText;
-      this.bigBox[0].innerText = winner;
-      this.bigBox[0].classList.add("smallGameOver");
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("smallGameOver");
     } else if (
       this.seven.innerText &&
       this.seven.innerText === this.eight.innerText &&
       this.seven.innerText === this.nine.innerText
     ) {
       winner = this.seven.innerText;
-      this.bigBox[0].innerText = winner;
-      this.bigBox[0].classList.add("smallGameOver");
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("smallGameOver");
     } else if (
       this.one.innerText &&
       this.one.innerText === this.four.innerText &&
       this.one.innerText === this.seven.innerText
     ) {
       winner = this.one.innerText;
-      this.bigBox[0].innerText = winner;
-      this.bigBox[0].classList.add("smallGameOver");
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("smallGameOver");
     } else if (
       this.two.innerText &&
       this.two.innerText === this.five.innerText &&
       this.two.innerText === this.eight.innerText
     ) {
       winner = this.two.innerText;
-      this.bigBox[0].innerText = winner;
-      this.bigBox[0].classList.add("smallGameOver");
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("smallGameOver");
     } else if (
       this.three.innerText &&
       this.three.innerText === this.six.innerText &&
       this.three.innerText === this.nine.innerText
     ) {
       winner = this.three.innerText;
-      this.bigBox[0].innerText = winner;
-      this.bigBox[0].classList.add("smallGameOver");
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("smallGameOver");
     } else if (
       this.one.innerText &&
       this.one.innerText === this.five.innerText &&
       this.one.innerText === this.nine.innerText
     ) {
       winner = this.one.innerText;
-      this.bigBox[0].innerText = winner;
-      this.bigBox[0].classList.add("smallGameOver");
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("smallGameOver");
     } else if (
       this.three.innerText &&
       this.three.innerText === this.five.innerText &&
       this.three.innerText === this.seven.innerText
     ) {
       winner = this.three.innerText;
-      this.bigBox[0].innerText = winner;
-      this.bigBox[0].classList.add("smallGameOver");
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("smallGameOver");
     } else {
       if (pieceCount >= 9) {
         checkForDraw();
@@ -122,6 +126,134 @@ class Board {
     }
   }
 }
+
+class BigBoard extends Board {
+  constructor(box, bigBox) {
+    super(box, bigBox);
+    this.one = big1;
+    this.two = big2;
+    this.three = big3;
+    this.four = big4;
+    this.five = big5;
+    this.six = big6;
+    this.seven = big7;
+    this.eight = big8;
+    this.nine = big9;
+    this.boards = [
+      this.one,
+      this.two,
+      this.three,
+      this.four,
+      this.five,
+      this.six,
+      this.seven,
+      this.eight,
+      this.nine,
+    ];
+  }
+  checkWin() {
+    for (let i = 0; i < this.boards.length; i++) {
+      this.boards[i].firstElementChild.classList.add("coverShow");
+    }
+    this.boards[
+      document.querySelector("h1").innerText
+    ].firstElementChild.classList.remove("coverShow");
+    if (
+      this.one.innerText &&
+      this.one.innerHTML === this.two.innerHTML &&
+      this.one.innerHTML === this.three.innerHTML
+    ) {
+      winner = this.one.innerText;
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("bigGameOver");
+      for (let i = 0; i < this.boards.length; i++) {
+        this.boards[i].firstElementChild.classList.remove("coverShow");
+      }
+    } else if (
+      this.four.innerText &&
+      this.four.innerHTML === this.five.innerHTML &&
+      this.four.innerHTML === this.six.innerHTML
+    ) {
+      winner = this.four.innerText;
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("bigGameOver");
+      for (let i = 0; i < this.boards.length; i++) {
+        this.boards[i].firstElementChild.classList.remove("coverShow");
+      }
+    } else if (
+      this.seven.innerText &&
+      this.seven.innerHTML === this.eight.innerHTML &&
+      this.seven.innerHTML === this.nine.innerHTML
+    ) {
+      winner = this.seven.innerText;
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("bigGameOver");
+      for (let i = 0; i < this.boards.length; i++) {
+        this.boards[i].firstElementChild.classList.remove("coverShow");
+      }
+    } else if (
+      this.one.innerText &&
+      this.one.innerHTML === this.four.innerHTML &&
+      this.one.innerHTML === this.seven.innerHTML
+    ) {
+      winner = this.one.innerText;
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("bigGameOver");
+      for (let i = 0; i < this.boards.length; i++) {
+        this.boards[i].firstElementChild.classList.remove("coverShow");
+      }
+    } else if (
+      this.two.innerText &&
+      this.two.innerHTML === this.five.innerHTML &&
+      this.two.innerHTML === this.eight.innerHTML
+    ) {
+      winner = this.two.innerText;
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("bigGameOver");
+      for (let i = 0; i < this.boards.length; i++) {
+        this.boards[i].firstElementChild.classList.remove("coverShow");
+      }
+    } else if (
+      this.three.innerText &&
+      this.three.innerHTML === this.six.innerHTML &&
+      this.three.innerHTML === this.nine.innerHTML
+    ) {
+      winner = this.three.innerText;
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("bigGameOver");
+      for (let i = 0; i < this.boards.length; i++) {
+        this.boards[i].firstElementChild.classList.remove("coverShow");
+      }
+    } else if (
+      this.one.innerText &&
+      this.one.innerHTML === this.five.innerHTML &&
+      this.one.innerHTML === this.nine.innerHTML
+    ) {
+      winner = this.one.innerText;
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("bigGameOver");
+      for (let i = 0; i < this.boards.length; i++) {
+        this.boards[i].firstElementChild.classList.remove("coverShow");
+      }
+    } else if (
+      this.three.innerText &&
+      this.three.innerHTML === this.five.innerHTML &&
+      this.three.innerHTML === this.seven.innerHTML
+    ) {
+      winner = this.three.innerText;
+      this.bigBox.innerText = winner;
+      this.bigBox.classList.add("bigGameOver");
+      for (let i = 0; i < this.boards.length; i++) {
+        this.boards[i].firstElementChild.classList.remove("coverShow");
+      }
+    } else {
+      if (pieceCount >= 9) {
+        checkForDraw();
+      }
+    }
+  }
+}
+
 const board1 = new Board(box1, big1);
 const board2 = new Board(box2, big2);
 const board3 = new Board(box3, big3);
@@ -131,6 +263,7 @@ const board6 = new Board(box6, big6);
 const board7 = new Board(box7, big7);
 const board8 = new Board(box8, big8);
 const board9 = new Board(box9, big9);
+const bigOne = new BigBoard(bigBox, container);
 let boxes = [
   board1,
   board2,
@@ -158,3 +291,6 @@ boxes.map((x) => x.addPiece());
 //   document.querySelector(".two").innerText = "O";
 //   document.querySelector(".two").classList.add("smallGameOver");
 // }
+document
+  .querySelector(".container")
+  .addEventListener("click", () => bigOne.checkWin());
