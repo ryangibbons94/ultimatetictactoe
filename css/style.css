@@ -1,0 +1,65 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0.5rem;
+}
+
+.container {
+  border: 4px solid black;
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: auto;
+}
+
+.square,
+.squareL {
+  width: 33.333333%;
+  border: 2px solid black;
+  height: 33.333333%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  font-size: 8rem;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+.square .squareL {
+  padding: 0.5rem 0.75rem;
+  font-size: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.smallGameOver {
+  line-height: 100px;
+  border: 4px solid black;
+  padding: 2rem;
+}
