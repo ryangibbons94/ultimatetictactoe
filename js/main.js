@@ -145,8 +145,6 @@ let boxes = [
 
 boxes.map((x) => x.addPiece());
 
-//need to add win conditions to each board
-
 //win condition on entire board
 
 //force next player to play in a certain square given which square the previous player played in
