@@ -19,6 +19,7 @@ let big8 = document.querySelector(".eight");
 let big9 = document.querySelector(".nine");
 let container = document.querySelector(".container");
 let cover = document.querySelectorAll(".cover");
+let nextTurn = document.querySelector("h2");
 let playerX = true;
 let pieceCount = 0;
 let winner;
@@ -46,10 +47,12 @@ class Board {
         if (playerX && this.box[i].innerText === "") {
           this.box[i].innerText = "X";
           playerX = false;
+          nextTurn.innerText = `O's Turn`;
           this.checkWin();
         } else if (!playerX && this.box[i].innerText === "") {
           this.box[i].innerText = "O";
           playerX = true;
+          nextTurn.innerText = `X's Turn`;
           this.checkWin();
         }
       });
