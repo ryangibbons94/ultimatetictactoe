@@ -22,6 +22,7 @@ let cover = document.querySelectorAll(".cover");
 let playerX = true;
 let pieceCount = 0;
 let winner;
+let availableBoards;
 
 class Board {
   constructor(box, bigBox) {
@@ -152,12 +153,7 @@ class BigBoard extends Board {
     ];
   }
   checkWin() {
-    for (let i = 0; i < this.boards.length; i++) {
-      this.boards[i].firstElementChild.classList.add("coverShow");
-    }
-    this.boards[
-      document.querySelector("h1").innerText
-    ].firstElementChild.classList.remove("coverShow");
+    this.showNextSquare();
     if (
       this.one.innerText &&
       this.one.innerHTML === this.two.innerHTML &&
@@ -249,6 +245,32 @@ class BigBoard extends Board {
     } else {
       if (pieceCount >= 9) {
         checkForDraw();
+      }
+    }
+  }
+  clearAllCover() {
+    availableBoards = this.boards.filter((x) => x.firstElementChild);
+    for (let i = 0; i < availableBoards.length; i++) {
+      availableBoards[i].firstElementChild.classList.remove("coverShow");
+    }
+  }
+  showNextSquare() {
+    if (
+      !this.boards[document.querySelector("h1").innerText].firstElementChild
+    ) {
+      this.clearAllCover();
+    } else {
+      for (let i = 0; i < this.boards.length; i++) {
+        if (this.boards[i].firstElementChild) {
+          for (let i = 0; i < this.boards.length; i++) {
+            if (this.boards[i].firstElementChild) {
+              this.boards[i].firstElementChild.classList.add("coverShow");
+            }
+          }
+          this.boards[
+            document.querySelector("h1").innerText
+          ].firstElementChild.classList.remove("coverShow");
+        }
       }
     }
   }
