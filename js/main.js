@@ -58,6 +58,7 @@ class Board {
       });
     }
   }
+
   checkWin() {
     if (
       this.one.innerText &&

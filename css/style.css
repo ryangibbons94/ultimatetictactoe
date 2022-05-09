@@ -62,6 +62,12 @@ body {
   cursor: pointer;
 }
 
+.squareL:hover {
+  opacity: 0.8;
+  border-color: black;
+  box-shadow: 15px 25px 50px black inset;
+}
+
 .cover {
   background-color: red;
   opacity: 0.5;
