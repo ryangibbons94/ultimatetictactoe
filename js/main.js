@@ -1,3 +1,5 @@
+//maybe add a function here that makes all of these variables
+
 let box1 = document.querySelectorAll(".little1");
 let box2 = document.querySelectorAll(".little2");
 let box3 = document.querySelectorAll(".little3");
