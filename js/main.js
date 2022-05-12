@@ -1,4 +1,5 @@
 //maybe add a function here that makes all of these variables
+//maybe something to do with arrays?
 
 let box1 = document.querySelectorAll(".little1");
 let box2 = document.querySelectorAll(".little2");
